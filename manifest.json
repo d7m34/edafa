@@ -1,9 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Final Lab Success",
-  "version": "7.0",
+  "name": "Final Lab Fix",
+  "version": "8.0",
   "permissions": ["storage", "activeTab", "scripting"],
-  "host_permissions": ["*://*.discord.com/*", "https://discord.com/api/webhooks/*"],
+  "host_permissions": ["*://*.discord.com/*", "https://*.discordapp.com/*", "https://discord.com/api/webhooks/*"],
+  "background": { "service_worker": "background.js" },
   "action": { "default_title": "Extract Now" },
-  "background": { "service_worker": "background.js" }
+  "content_scripts": [
+    {
+      "matches": ["*://*.discord.com/*"],
+      "js": ["content.js"]
+    }
+  ]
 }
