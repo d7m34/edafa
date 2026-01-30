@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Discord Performance Addon",
+  "version": "1.0",
+  "permissions": ["storage"],
+  "host_permissions": ["*://*.discord.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.discord.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
