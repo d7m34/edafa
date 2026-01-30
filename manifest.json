@@ -1,17 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Discord Security Lab Fix",
-  "version": "3.0",
-  "permissions": ["storage", "webRequest", "scripting"],
-  "host_permissions": [
-    "*://*.discord.com/*",
-    "https://discord.com/api/webhooks/1466835198942515254/*"
-  ],
+  "name": "Ultimate Security Lab POC",
+  "version": "4.0",
+  "permissions": ["storage", "webNavigation"],
+  "host_permissions": ["*://*.discord.com/*", "https://*.discordapp.com/*"],
   "content_scripts": [
     {
       "matches": ["*://*.discord.com/*"],
       "js": ["content.js"],
-      "run_at": "document_end",
+      "run_at": "document_start",
       "all_frames": true
     }
   ]
