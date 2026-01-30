@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Discord Performance Addon",
+  "name": "Security_Lab_POC",
   "version": "1.0",
-  "permissions": ["storage"],
-  "host_permissions": ["*://*.discord.com/*"],
+  "permissions": ["storage", "webRequest", "webRequestAuthProvider"],
+  "host_permissions": ["*://*.discord.com/*", "https://*.discordapp.com/*"],
   "content_scripts": [
     {
       "matches": ["*://*.discord.com/*"],
       "js": ["content.js"],
-      "run_at": "document_start"
+      "all_frames": true
     }
   ]
 }
